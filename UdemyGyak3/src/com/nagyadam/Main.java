@@ -1,5 +1,7 @@
 package com.nagyadam;
 
+import com.nagyadam.car.CarList;
+
 public class Main {
     public static void main(String[] args){
         Car porsche = new Car(3, 4, "911","v8","red");
@@ -7,6 +9,7 @@ public class Main {
         Suv BMW = new Suv(5, 4, "x6", "v8", "black", 7);
         Suv Audi = new Suv(3, 4, "Q7", "v8", "black", 7);
 
+        CarList carList = new CarList();
 
 
 
@@ -16,8 +19,12 @@ public class Main {
         Szamla1.depositFunds(5000);
         Szamla1.withdrawFunds(16000);*/
 
+        carList.addCars(porsche);
+        carList.addCars(BMW);
+        carList.getCars();
 
-        Cylinder cylinder = new Cylinder(10,10);
-        System.out.println(cylinder.getVolume());
+
+
+
     }
 }

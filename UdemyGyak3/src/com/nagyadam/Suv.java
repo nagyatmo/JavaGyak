@@ -3,7 +3,7 @@ package com.nagyadam;
 public class Suv extends Car{
     private int seats;
     public Suv(int doors, int wheels, String model, String engine, String colour, int seats){
-        super();
+        super(doors, wheels, model, engine, colour);
         this.seats=seats;
     }
 

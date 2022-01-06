@@ -1,5 +1,7 @@
 package com.nagyadam;
 
+import java.util.ArrayList;
+
 public class Car {
 
     private int doors;
@@ -7,6 +9,7 @@ public class Car {
     private String model;
     private String engine;
     private String colour;
+
 
     public Car(int doors, int wheels, String model, String engine, String colour){
         this.doors=doors;
@@ -36,4 +39,6 @@ public class Car {
             System.out.println(b.getModel() + " model has more doors");
         }
     }
+
+
 }
