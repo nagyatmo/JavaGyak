@@ -1,101 +1,120 @@
 package Lists;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
+
     private static Scanner scanner = new Scanner(System.in);
-    public static void main(String[] args){
-        /*System.out.println("Enter how many Integers you want to store: ");
-        int number=scanner.nextInt();
-        int[] myIntegers = setIntegers(number);
-        getIntegers(myIntegers);
-        System.out.println("The average of the entered numbers: " + getAverage(myIntegers));
+    private static GroceryList groceryList = new GroceryList();
 
-        getIntegers(sortArray(myIntegers));
+    public static void main(String[] args) {
+        boolean quit = false;
+        int choice = 0;
+        MobilePhone myPhone = new MobilePhone();
 
-        System.out.println(findMin(myIntegers));
 
-        System.out.println(Arrays.toString(resizeArray(myIntegers)));
-        */
+        printInstructions();
+        while (!quit) {
+            System.out.println("Enter your choice: ");
+            choice = scanner.nextInt();
+            scanner.nextLine();
 
-        GroceryList groceryList = new GroceryList();
-        groceryList.addGroceryItem("milk");
-        groceryList.addGroceryItem("bread");
-        groceryList.printGroceryList();
-    }
-    public static int[] setIntegers(int number){
-        System.out.println("Enter " + number + " integer values.\r");
-        int[] values = new int[number];
-
-        for(int i=0;i<values.length;i++){
-            values[i]=scanner.nextInt();
-        }
-        return values;
-    }
-
-    public static void getIntegers(int[] array){
-        for(int i=0;i<array.length;i++){
-            System.out.println("Stored value on the "+ (i+1)+ ". element is: "+array[i]);
-        }
-    }
-
-    public static double getAverage(int[] array){
-        double sum=0;
-        for(int i=0;i<array.length;i++){
-            sum+=array[i];
-        }
-        return sum/array.length;
-    }
-
-    public static int[] sortArray(int[] array){
-        int[] sortedArray = new int[array.length];
-        for(int i=0;i<array.length;i++){
-            sortedArray[i]=array[i];
-        }
-        boolean flag=true;
-        int temp;
-        while(flag){
-            flag=false;
-            for(int i=0;i<sortedArray.length-1;i++){
-                if(sortedArray[i]>sortedArray[i+1]){
-                    temp=sortedArray[i];
-                    sortedArray[i]=sortedArray[i+1];
-                    sortedArray[i+1]=temp;
-                    flag=true;
-                }
+            switch (choice) {
+                case 0:
+                    printInstructions();
+                    break;
+                case 1:
+                    myPhone.listContacts();
+                    break;
+                case 2:
+                    myPhone.storeContact();
+                    break;
+                case 3:
+                    myPhone.modifyContact();
+                    break;
+                case 4:
+                    myPhone.removeContact();
+                    break;
+                case 5:
+                    myPhone.searchContact();
+                case 6:
+                    myPhone.call();
+                    break;
+                case 7:
+                    myPhone.callList();
+                    break;
+                case 8:
+                    quit = true;
+                    break;
             }
         }
-        return sortedArray;
+
     }
 
-    public static int findMin(int[] array){
-        int[] sortedArray = new int[array.length];
-        for(int i=0;i<array.length;i++){
-            sortedArray[i]=array[i];
-        }
-        boolean flag=true;
-        int temp;
-        while(flag){
-            flag=false;
-            for(int i=0;i<sortedArray.length-1;i++){
-                if(sortedArray[i]>sortedArray[i+1]){
-                    temp=sortedArray[i];
-                    sortedArray[i]=sortedArray[i+1];
-                    sortedArray[i+1]=temp;
-                    flag=true;
-                }
-            }
-        }
-        return sortedArray[0];
+    /*public static void printInstructions() {
+        System.out.println("\nPress ");
+        System.out.println("\t 0 - To print choice options.");
+        System.out.println("\t 1 - To print the list of grocery items.");
+        System.out.println("\t 2 - To add an item to the list.");
+        System.out.println("\t 3 - To modify an item in the list.");
+        System.out.println("\t 4 - To remove an item from the list.");
+        System.out.println("\t 5 - To search for an item in the list.");
+        System.out.println("\t 6 - To quit the application.");
+    }*/
+    public static void printInstructions() {
+        System.out.println("\nPress ");
+        System.out.println("\t 0 - To open menu.");
+        System.out.println("\t 1 - To print the list of contacts.");
+        System.out.println("\t 2 - To add a contact.");
+        System.out.println("\t 3 - To modify a contact.");
+        System.out.println("\t 4 - To remove a contact.");
+        System.out.println("\t 5 - To search for a contact.");
+        System.out.println("\t 6 - To initiate a call.");
+        System.out.println("\t 7 - To see list of calls.");
+        System.out.println("\t 8 - To quit menu.");
     }
 
-    public static int[] resizeArray(int[] array){
-        int[] newArray =array;
-        array=new int[array.length+2];
-        for(int i=0;i<newArray.length;i++){
-            array[i]=newArray[i];
-        }
-        return array;
+    public static void addItem() {
+        System.out.print("Please enter the grocery item: ");
+        groceryList.addGroceryItem(scanner.nextLine());
     }
+
+    public static void modifyItem() {
+        System.out.print("Current item name: ");
+        String itemNo = scanner.nextLine();
+        System.out.print("Enter new item: ");
+        String newItem = scanner.nextLine();
+        groceryList.modifyGroceryItem(itemNo, newItem);
+    }
+
+    public static void removeItem() {
+        System.out.print("Enter item name: ");
+        String itemNo = scanner.nextLine();
+        groceryList.removeGroceryItem(itemNo);
+    }
+
+    public static void searchForItem() {
+        System.out.print("Item to search for: ");
+        String searchItem = scanner.nextLine();
+        if(groceryList.onFile(searchItem)) {
+            System.out.println("Found " + searchItem);
+        } else {
+            System.out.println(searchItem + ", not on file.");
+        }
+    }
+
+    public static void processArrayList() {
+        ArrayList<String> newArray = new ArrayList<String>();
+        newArray.addAll(groceryList.getGroceryList());
+
+        ArrayList<String> nextArray = new ArrayList<String>(groceryList.getGroceryList());
+
+        String[] myArray = new String[groceryList.getGroceryList().size()];
+        myArray = groceryList.getGroceryList().toArray(myArray);
+
+
+    }
+
+
 }
